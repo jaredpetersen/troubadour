@@ -45,6 +45,16 @@ describe('Play', function() {
     jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
   });
 
+  it('returns an error when pased a bad location', function(done) {
+    var jukebox = new Jukebox();
+    jukebox.on('error', function(err) {
+      expect(err).to.exist;
+      expect(err.message).to.equal('filepath not found');
+      done();
+    });
+    jukebox.play('badfilepath');
+  });
+
 });
 
 describe('Pause', function() {
