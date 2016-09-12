@@ -5,9 +5,16 @@ var process = require('child_process');
 
 class Jukebox extends EventEmitter {
 
-  constructor() {
+  constructor(audioPlayer) {
     super();
-    this.sox;
+
+    // Determine which audio player library to use
+    if (audioPlayer.toLowerCase() == 'sox') {
+      this.audioPlayerLib = require('./lib/sox.js');
+    }
+    else {
+      throw new Error('audioPlayer not supported')
+    }
   }
 
   play(filepath) {
@@ -27,31 +34,10 @@ class Jukebox extends EventEmitter {
     }
     catch(err) {
       this.emit('error', new Error('filepath not found'));
-      return; 
+      return;
     }
 
-    // Start playing audio
-    this.sox = process.spawn('play', [filepath]);
-
-    // Encode the stream data
-    if (this.sox.stderr) {
-      this.sox.stderr.setEncoding('utf-8');
-    }
-
-    // Handle the data output from the audio process
-    var handleDataEvent = function (data) {
-      console.log(data);
-      if (data.includes('play FAIL')) {
-        this.sox.stderr.removeListener('data', handleDataEvent);
-        this.emit('error', new Error('unable to play audio'));
-      }
-      else if (data.match(/a-z/i)) {
-        console.log('getting data');
-      }
-    }.bind(this);
-
-    // Listen to the audio process
-    this.sox.stderr.on('data', handleDataEvent);
+    this.audioPlayerLib.play(this, filepath);
   }
 
 }

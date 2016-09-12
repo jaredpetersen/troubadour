@@ -3,68 +3,80 @@
 var expect = require('chai').expect;
 var Jukebox = require('../index.js');
 
-describe('Play', function() {
+describe('index.js', function() {
 
-  it('returns an error when it is not passed a filepath', function(done) {
-    var jukebox = new Jukebox();
-    jukebox.on('error', function(err) {
-      expect(err).to.exist;
-      expect(err.message).to.equal('filepath not specified');
-      done();
-    });
-    jukebox.play();
+  describe('Constructor', function() {
+
+    it('throws an error when it is not passed the name of a audio player library');
+
+    it('throws an error when it is passsed the name of a non-supported audio player library');
+
   });
 
-  it('returns an error when another command is injected (;)', function(done) {
-    var jukebox = new Jukebox();
-    jukebox.on('error', function(err) {
-      expect(err).to.exist;
-      expect(err.message).to.equal('invalid filepath');
-      done();
+  describe('Play', function() {
+
+    it('returns an error when it is not passed a filepath', function(done) {
+      var jukebox = new Jukebox('sox');
+      jukebox.on('error', function(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('filepath not specified');
+        done();
+      });
+      jukebox.play();
     });
-    jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
+
+    it('returns an error when another command is injected (;)', function(done) {
+      var jukebox = new Jukebox('sox');
+      jukebox.on('error', function(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('invalid filepath');
+        done();
+      });
+      jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
+    });
+
+    it('returns an error when another command is injected (&&)', function(done) {
+      var jukebox = new Jukebox('sox');
+      jukebox.on('error', function(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('invalid filepath');
+        done();
+      });
+      jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
+    });
+
+    it('returns an error when another command is injected (||)', function(done) {
+      var jukebox = new Jukebox('sox');
+      jukebox.on('error', function(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('invalid filepath');
+        done();
+      });
+      jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
+    });
+
+    it('returns an error when pased a bad location', function(done) {
+      var jukebox = new Jukebox('sox');
+      jukebox.on('error', function(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('filepath not found');
+        done();
+      });
+      jukebox.play('badfilepath');
+    });
+
   });
 
-  it('returns an error when another command is injected (&&)', function(done) {
-    var jukebox = new Jukebox();
-    jukebox.on('error', function(err) {
-      expect(err).to.exist;
-      expect(err.message).to.equal('invalid filepath');
-      done();
-    });
-    jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
+  describe('Pause', function() {
+
+    it('returns an error when audio playback is not ongoing')
+
   });
 
-  it('returns an error when another command is injected (||)', function(done) {
-    var jukebox = new Jukebox();
-    jukebox.on('error', function(err) {
-      expect(err).to.exist;
-      expect(err.message).to.equal('invalid filepath');
-      done();
-    });
-    jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
+  describe('Stop', function() {
+
+    it('returns an error when audio playback is not ongoing')
+
   });
-
-  it('returns an error when pased a bad location', function(done) {
-    var jukebox = new Jukebox();
-    jukebox.on('error', function(err) {
-      expect(err).to.exist;
-      expect(err.message).to.equal('filepath not found');
-      done();
-    });
-    jukebox.play('badfilepath');
-  });
-
-});
-
-describe('Pause', function() {
-
-  it('returns an error when audio playback is not ongoing')
-
-});
-
-describe('Stop', function() {
-
-  it('returns an error when audio playback is not ongoing')
 
 });
