@@ -1,10 +1,18 @@
 'use strict';
 
 var expect = require('chai').expect;
+var process = require('child_process');
 var EventEmitter = require('events').EventEmitter;
 var sox = require('../lib/sox.js');
 
 describe('sox.js', function() {
+
+  afterEach(function() {
+    try {
+      process.execSync('pkill -9 play');
+    }
+    catch(err) {}
+  });
 
   describe('Play', function() {
 
