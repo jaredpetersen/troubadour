@@ -24,6 +24,14 @@ describe('Sox Audio Player Library (sox.js)', function() {
       sox.play(eventEmitter, 'test/audio/splashing_around.mp3');
     });
 
+    it('emits an end event when the audio finishes playing', function(done) {
+      var eventEmitter = new EventEmitter();
+      eventEmitter.on('end', function() {
+        done();
+      });
+      sox.play();
+    });
+
     it('throws an error when an EventEmitter is not passed to it', function(done) {
       try {
         sox.play('test/audio/splashing_around.mp3');
