@@ -3,7 +3,7 @@
 var expect = require('chai').expect;
 var Jukebox = require('../index.js');
 
-describe('index.js', function() {
+describe('Jukebox (index.js)', function() {
 
   describe('Constructor', function() {
 

@@ -5,7 +5,7 @@ var process = require('child_process');
 var EventEmitter = require('events').EventEmitter;
 var sox = require('../lib/sox.js');
 
-describe('sox.js', function() {
+describe('Sox Audio Player Library (sox.js)', function() {
 
   afterEach(function() {
     try {
