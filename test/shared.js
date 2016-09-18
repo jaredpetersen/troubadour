@@ -15,11 +15,12 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
     });
 
     it('emits an end event when the audio finishes playing', function(done) {
+      this.timeout(10000);
       var jukebox = new Jukebox(audioLib);
       jukebox.on('end', function() {
         done();
       });
-      jukebox.play();
+      jukebox.play('test/audio/alarm_clock.mp3');
     });
 
   });

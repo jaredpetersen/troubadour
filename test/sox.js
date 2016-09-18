@@ -25,11 +25,12 @@ describe('Sox Audio Player Library (sox.js)', function() {
     });
 
     it('emits an end event when the audio finishes playing', function(done) {
+      this.timeout(10000);
       var eventEmitter = new EventEmitter();
       eventEmitter.on('end', function() {
         done();
       });
-      sox.play();
+      sox.play(eventEmitter, 'test/audio/alarm_clock.mp3');
     });
 
     it('throws an error when an EventEmitter is not passed to it', function(done) {
