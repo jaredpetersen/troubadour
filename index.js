@@ -9,11 +9,14 @@ class Jukebox extends EventEmitter {
     super();
 
     // Determine which audio player library to use
-    if (audioPlayer.toLowerCase() == 'sox') {
+    if (audioPlayer == null) {
+      throw new Error('audio library not specified');
+    }
+    else if (audioPlayer.toLowerCase() == 'sox') {
       this.audioPlayerLib = require('./lib/sox.js');
     }
     else {
-      throw new Error('audioPlayer not supported')
+      throw new Error('audio library not supported')
     }
   }
 
