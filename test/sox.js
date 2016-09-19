@@ -69,4 +69,39 @@ describe('Sox Audio Player Library (sox.js)', function() {
 
   });
 
+  describe('Pause', function() {
+
+    it('emits a pause event when the audio is paused', function(done) {
+      var eventEmitter = new EventEmitter();
+      eventEmitter.on('start', function() {
+        sox.pause(eventEmitter);
+      });
+      eventEmitter.on('pause', function() {
+        done();
+      });
+      sox.play(eventEmitter, 'test/audio/splashing_around.mp3');
+    });
+
+    it('emits an error event when audio playback has not been started', function(done) {
+      var eventEmitter = new EventEmitter();
+      eventEmitter.on('error', function(message) {
+        expect(message).to.equal('no audio playback to pause');
+        done();
+      });
+      sox.pause(eventEmitter, 'test/audio/splashing_around.mp3');
+    });
+
+    it('throws an error when an EventEmitter is not passed to it', function(done) {
+      try {
+        sox.pause();
+      }
+      catch(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('missing parameter');
+        done();
+      }
+    });
+
+  });
+
 });
