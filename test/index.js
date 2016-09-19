@@ -7,9 +7,27 @@ describe('Jukebox (index.js)', function() {
 
   describe('Constructor', function() {
 
-    it('throws an error when it is not passed the name of a audio player library');
+    it('throws an error when it is not passed the name of a audio player library', function(done) {
+      try {
+        var jukebox = new Jukebox();
+      }
+      catch(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('audio library not specified');
+        done();
+      }
+    });
 
-    it('throws an error when it is passsed the name of a non-supported audio player library');
+    it('throws an error when it is passsed the name of a non-supported audio player library', function(done) {
+      try {
+        var jukebox = new Jukebox('pikachu');
+      }
+      catch(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('audio library not supported');
+        done();
+      }
+    });
 
   });
 
