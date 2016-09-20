@@ -28,7 +28,7 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
   describe('Pause', function() {
 
-    it('emits a pause event when the audio is pause', function(done) {
+    it('emits a pause event when the audio is paused', function(done) {
       var jukebox = new Jukebox(audioLib);
 
       // Wait until the music starts to pause it

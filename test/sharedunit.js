@@ -3,16 +3,8 @@
 var expect = require('chai').expect;
 var process = require('child_process');
 var EventEmitter = require('events').EventEmitter;
-var sox = require('../lib/sox.js');
 
-describe('Sox Audio Player Library (sox.js)', function() {
-
-  afterEach(function() {
-    try {
-      process.execSync('pkill -9 play');
-    }
-    catch(err) {}
-  });
+exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
   describe('Play', function() {
 
@@ -21,7 +13,7 @@ describe('Sox Audio Player Library (sox.js)', function() {
       eventEmitter.on('start', function() {
         done();
       });
-      sox.play(eventEmitter, 'test/audio/splashing_around.mp3');
+      audioLib.play(eventEmitter, 'test/audio/splashing_around.mp3');
     });
 
     it('emits an end event when the audio finishes playing', function(done) {
@@ -30,12 +22,12 @@ describe('Sox Audio Player Library (sox.js)', function() {
       eventEmitter.on('end', function() {
         done();
       });
-      sox.play(eventEmitter, 'test/audio/alarm_clock.mp3');
+      audioLib.play(eventEmitter, 'test/audio/alarm_clock.mp3');
     });
 
     it('throws an error when an EventEmitter is not passed to it', function(done) {
       try {
-        sox.play('test/audio/splashing_around.mp3');
+        audioLib.play('test/audio/splashing_around.mp3');
       }
       catch(err) {
         expect(err).to.exist;
@@ -47,7 +39,7 @@ describe('Sox Audio Player Library (sox.js)', function() {
     it('throws an error when a filepath is not passed to it', function(done) {
       var eventEmitter = new EventEmitter();
       try {
-        sox.play(eventEmitter);
+        audioLib.play(eventEmitter);
       }
       catch(err) {
         expect(err).to.exist;
@@ -58,7 +50,7 @@ describe('Sox Audio Player Library (sox.js)', function() {
 
     it('throws an error when parameters are not passed', function(done) {
       try {
-        sox.play();
+        audioLib.play();
       }
       catch(err) {
         expect(err).to.exist;
@@ -73,13 +65,17 @@ describe('Sox Audio Player Library (sox.js)', function() {
 
     it('emits a pause event when the audio is paused', function(done) {
       var eventEmitter = new EventEmitter();
+
+      // Wait until the music starts to pause it
       eventEmitter.on('start', function() {
-        sox.pause(eventEmitter);
+        audioLib.pause(eventEmitter);
       });
+
       eventEmitter.on('pause', function() {
         done();
       });
-      sox.play(eventEmitter, 'test/audio/splashing_around.mp3');
+
+      audioLib.play(eventEmitter, 'test/audio/splashing_around.mp3');
     });
 
     it('emits an error event when audio playback has not been started', function(done) {
@@ -88,12 +84,12 @@ describe('Sox Audio Player Library (sox.js)', function() {
         expect(message).to.equal('no audio playback to pause');
         done();
       });
-      sox.pause(eventEmitter, 'test/audio/splashing_around.mp3');
+      audioLib.pause(eventEmitter, 'test/audio/splashing_around.mp3');
     });
 
     it('throws an error when an EventEmitter is not passed to it', function(done) {
       try {
-        sox.pause();
+        audioLib.pause();
       }
       catch(err) {
         expect(err).to.exist;
@@ -104,4 +100,4 @@ describe('Sox Audio Player Library (sox.js)', function() {
 
   });
 
-});
+};
