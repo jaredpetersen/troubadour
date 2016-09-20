@@ -33,6 +33,10 @@ describe('Jukebox (index.js)', function() {
 
   describe('Play', function() {
 
+    /* A lot of these test use sox for the audio player library, but integration
+       with sox is not actually being tested here, just the functionality before
+       the library is invoked */
+
     it('returns an error when it is not passed a filepath', function(done) {
       var jukebox = new Jukebox('sox');
       jukebox.on('error', function(err) {
@@ -85,11 +89,7 @@ describe('Jukebox (index.js)', function() {
 
   });
 
-  describe('Pause', function() {
-
-    it('returns an error when audio playback is not ongoing')
-
-  });
+  // No need to test Pause here, since the function only calls the audio player library
 
   describe('Stop', function() {
 
