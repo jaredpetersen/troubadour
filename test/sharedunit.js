@@ -100,4 +100,43 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
   });
 
+  describe('Stop', function() {
+
+    it('emits a stop event when the audio playback has been stopped', function(done) {
+      var eventEmitter = new EventEmitter();
+
+      // Wait until the music starts to stop it
+      eventEmitter.on('start', function() {
+        audioLib.stop(eventEmitter);
+      });
+
+      eventEmitter.on('stop', function() {
+        done();
+      });
+
+      audioLib.play(eventEmitter, 'test/audio/splashing_around.mp3');
+    });
+
+    it('emits an error event when audio playback has not been started', function(done) {
+      var eventEmitter = new EventEmitter();
+      eventEmitter.on('error', function(message) {
+        expect(message).to.equal('no audio playback to stop');
+        done();
+      });
+      audioLib.stop(eventEmitter, 'test/audio/splashing_around.mp3');
+    });
+
+    it('throws an error when an EventEmitter is not passed to it', function(done) {
+      try {
+        audioLib.stop();
+      }
+      catch(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('missing parameter');
+        done();
+      }
+    });
+
+  });
+
 };
