@@ -89,12 +89,6 @@ describe('Jukebox (index.js)', function() {
 
   });
 
-  // No need to test Pause here, since the function only calls the audio player library
-
-  describe('Stop', function() {
-
-    it('returns an error when audio playback is not ongoing')
-
-  });
+  // No need to test Pause or Stop here, since both functions only call the audio player library
 
 });

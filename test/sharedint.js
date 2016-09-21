@@ -57,4 +57,35 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
   });
 
+  describe('Stop', function() {
+
+    it('emits a stop event when the audio is stopped', function(done) {
+      var jukebox = new Jukebox(audioLib);
+
+      // Wait until the music starts to stop it
+      jukebox.on('start', function() {
+        jukebox.stop();
+      });
+
+      jukebox.on('stop', function() {
+        done();
+      });
+
+      jukebox.play('test/audio/splashing_around.mp3');
+    });
+
+    it('emits an error event when audio playback has not been started', function(done) {
+      var jukebox = new Jukebox(audioLib);
+
+      // Listen for the error event
+      jukebox.on('error', function(message) {
+        expect(message).to.equal('no audio playback to stop');
+        done();
+      });
+
+      jukebox.stop();
+    });
+
+  });
+
 };
