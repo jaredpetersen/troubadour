@@ -16,6 +16,8 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
       audioLib.play(eventEmitter, 'test/audio/splashing_around.mp3');
     });
 
+    it('emits an error event when the audio file was not found');
+
     it('emits an end event when the audio finishes playing', function(done) {
       this.timeout(10000);
       var eventEmitter = new EventEmitter();
