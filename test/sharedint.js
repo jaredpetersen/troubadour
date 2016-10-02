@@ -47,8 +47,8 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
       var jukebox = new Jukebox(audioLib);
 
       // Listen for the error event
-      jukebox.on('error', function(message) {
-        expect(message).to.equal('no audio playback to pause');
+      jukebox.on('error', function(err) {
+        expect(err.message).to.equal('no audio playback to pause');
         done();
       });
 
@@ -78,8 +78,8 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
       var jukebox = new Jukebox(audioLib);
 
       // Listen for the error event
-      jukebox.on('error', function(message) {
-        expect(message).to.equal('no audio playback to stop');
+      jukebox.on('error', function(err) {
+        expect(err.message).to.equal('no audio playback to stop');
         done();
       });
 

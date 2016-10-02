@@ -80,8 +80,8 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
     it('emits an error event when audio playback has not been started', function(done) {
       var eventEmitter = new EventEmitter();
-      eventEmitter.on('error', function(message) {
-        expect(message).to.equal('no audio playback to pause');
+      eventEmitter.on('error', function(err) {
+        expect(err.message).to.equal('no audio playback to pause');
         done();
       });
       audioLib.pause(eventEmitter, 'test/audio/splashing_around.mp3');
@@ -119,8 +119,8 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
     it('emits an error event when audio playback has not been started', function(done) {
       var eventEmitter = new EventEmitter();
-      eventEmitter.on('error', function(message) {
-        expect(message).to.equal('no audio playback to stop');
+      eventEmitter.on('error', function(err) {
+        expect(err.message).to.equal('no audio playback to stop');
         done();
       });
       audioLib.stop(eventEmitter, 'test/audio/splashing_around.mp3');
