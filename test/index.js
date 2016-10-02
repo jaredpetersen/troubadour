@@ -37,7 +37,7 @@ describe('Jukebox (index.js)', function() {
        with sox is not actually being tested here, just the functionality before
        the library is invoked */
 
-    it('returns an error when it is not passed a filepath', function(done) {
+    it('emits an error when it is not passed a filepath', function(done) {
       var jukebox = new Jukebox('sox');
       jukebox.on('error', function(err) {
         expect(err).to.exist;
@@ -47,7 +47,7 @@ describe('Jukebox (index.js)', function() {
       jukebox.play();
     });
 
-    it('returns an error when another command is injected (;)', function(done) {
+    it('emits an error when another command is injected (;)', function(done) {
       var jukebox = new Jukebox('sox');
       jukebox.on('error', function(err) {
         expect(err).to.exist;
@@ -57,7 +57,7 @@ describe('Jukebox (index.js)', function() {
       jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
     });
 
-    it('returns an error when another command is injected (&&)', function(done) {
+    it('emits an error when another command is injected (&&)', function(done) {
       var jukebox = new Jukebox('sox');
       jukebox.on('error', function(err) {
         expect(err).to.exist;
@@ -67,7 +67,7 @@ describe('Jukebox (index.js)', function() {
       jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
     });
 
-    it('returns an error when another command is injected (||)', function(done) {
+    it('emits an error when another command is injected (||)', function(done) {
       var jukebox = new Jukebox('sox');
       jukebox.on('error', function(err) {
         expect(err).to.exist;
@@ -77,7 +77,7 @@ describe('Jukebox (index.js)', function() {
       jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
     });
 
-    it('returns an error when pased a bad location', function(done) {
+    it('emits an error when pased a bad location', function(done) {
       var jukebox = new Jukebox('sox');
       jukebox.on('error', function(err) {
         expect(err).to.exist;
