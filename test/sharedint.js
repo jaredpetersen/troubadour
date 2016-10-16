@@ -55,6 +55,8 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
       jukebox.pause();
     });
 
+    it('emits an error event when audio playback is not ongoing');
+
   });
 
   describe('Stop', function() {
@@ -85,6 +87,8 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
       jukebox.stop();
     });
+
+    it('emits an error event when audio playback is not ongoing');
 
   });
 

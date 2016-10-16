@@ -87,6 +87,8 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
       audioLib.pause(eventEmitter, 'test/audio/splashing_around.mp3');
     });
 
+    it('emits an error when audio playback is not ongoing');
+
     it('throws an error when an EventEmitter is not passed to it', function(done) {
       try {
         audioLib.pause();
@@ -125,6 +127,8 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
       });
       audioLib.stop(eventEmitter, 'test/audio/splashing_around.mp3');
     });
+
+    it('emits an error when audio playback is not ongoing');
 
     it('throws an error when an EventEmitter is not passed to it', function(done) {
       try {
