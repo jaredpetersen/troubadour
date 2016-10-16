@@ -2,6 +2,7 @@
 
 var EventEmitter = require('events');
 var process = require('child_process');
+var fs = require('fs');
 
 class Jukebox extends EventEmitter {
 
@@ -30,12 +31,7 @@ class Jukebox extends EventEmitter {
       this.emit('error', new Error('invalid filepath'));
       return;
     }
-
-    // Confirm that the filepath exists
-    try {
-      process.execSync('find ' + filepath, {stdio: 'ignore'});
-    }
-    catch(err) {
+    else if(fs.existsSync(filepath) == false) {
       this.emit('error', new Error('filepath not found'));
       return;
     }
