@@ -40,7 +40,7 @@ jukebox.play('~/Music/audiofile.mp3');
 ```
 
 ### Pause
-To pause the playback (with the ability to resume later), use the `pause` function:
+Pause the playback (with the ability to resume later) by using the `pause` function:
 
 ```javascript
 jukebox.on('pause', function() {
@@ -51,7 +51,7 @@ jukebox.pause();
 ```
 
 ### Stop
-To stop the playback (without the ability to resume later), use the `stop` function:
+Stop the playback (without the ability to resume later) by using the `stop` function:
 
 ```javascript
 jukebox.on('stop', function() {
@@ -64,7 +64,7 @@ jukebox.stop();
 ### Errors
 Jukebox handles errors in two different ways: abruptly throwing an error when the error was not recoverable or gracefully emitting the error when it is recoverable.
 
-Errors like not passing the name of a supported command-line audio player to the Jukebox constructor are not recoverable, so the module will throw an error. Errors like calling the `play` function without a file path specified are recoverable, so Jukebox will just emit an error event to let the user know.
+Errors like not passing the name of a supported command-line audio player to the Jukebox constructor are not recoverable, so the module will throw an error. Errors like calling the `play` function without specifying a file path are recoverable, so Jukebox will just emit an error event to let the user know.
 
 The error listener can be set up by including the following:
 
