@@ -1,5 +1,5 @@
 # Troubadour
-[![Build Status](https://travis-ci.com/jaredpetersen/jukebox.svg?token=U58FHdxksYsWZzj98oVM&branch=master)](https://travis-ci.com/jaredpetersen/jukebox)
+[![Build Status](https://travis-ci.com/jaredpetersen/troubadour.svg?token=U58FHdxksYsWZzj98oVM&branch=master)](https://travis-ci.com/jaredpetersen/troubadour)
 
 Troubadour is wrapper over command-line audio players that makes it easy to play audio in Node.js. At this point, only Sox is supported but other audio players can easily be added.
 
@@ -11,7 +11,7 @@ Since Troubadour only supports Sox at the moment, you will need to install Sox i
 
 ## Usage
 ### Getting Started
-To get started, require the module in your program and create a new Jukebox instance by passing the name of the supported audio player into the constructor.
+To get started, require the module in your program and create a new Troubadour instance by passing the name of the supported audio player into the constructor.
 
 ```javascript
 var Troubadour = require('troubadour');
