@@ -10,18 +10,21 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
     it('emits a start event when the audio starts playing', function(done) {
       var eventEmitter = new EventEmitter();
+
       eventEmitter.on('start', function() {
         done();
       });
+
       audioLib.play(eventEmitter, 'test/audio/splashing_around.mp3');
     });
 
     it('emits an end event when the audio finishes playing', function(done) {
-      this.timeout(10000);
       var eventEmitter = new EventEmitter();
+
       eventEmitter.on('end', function() {
         done();
       });
+
       audioLib.play(eventEmitter, 'test/audio/alarm_clock.mp3');
     });
 
@@ -66,11 +69,10 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
     it('emits a pause event when the audio is paused', function(done) {
       var eventEmitter = new EventEmitter();
 
-      // Wait until the music starts to pause it
+      // Wait until the audio starts to pause it
       eventEmitter.on('start', function() {
         audioLib.pause(eventEmitter);
       });
-
       eventEmitter.on('pause', function() {
         done();
       });
@@ -80,10 +82,12 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
     it('emits an error event when audio playback has not been started', function(done) {
       var eventEmitter = new EventEmitter();
+
       eventEmitter.on('error', function(err) {
         expect(err.message).to.equal('no audio playback to pause');
         done();
       });
+
       audioLib.pause(eventEmitter, 'test/audio/splashing_around.mp3');
     });
 
@@ -107,11 +111,10 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
     it('emits a stop event when the audio playback has been stopped', function(done) {
       var eventEmitter = new EventEmitter();
 
-      // Wait until the music starts to stop it
+      // Wait until the audio starts to stop it
       eventEmitter.on('start', function() {
         audioLib.stop(eventEmitter);
       });
-
       eventEmitter.on('stop', function() {
         done();
       });
@@ -121,10 +124,12 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
     it('emits an error event when audio playback has not been started', function(done) {
       var eventEmitter = new EventEmitter();
+
       eventEmitter.on('error', function(err) {
         expect(err.message).to.equal('no audio playback to stop');
         done();
       });
+
       audioLib.stop(eventEmitter, 'test/audio/splashing_around.mp3');
     });
 
@@ -133,6 +138,49 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
     it('throws an error when an EventEmitter is not passed to it', function(done) {
       try {
         audioLib.stop();
+      }
+      catch(err) {
+        expect(err).to.exist;
+        expect(err.message).to.equal('missing parameter');
+        done();
+      }
+    });
+
+  });
+
+  describe('Resume', function() {
+
+    it('emits a resume event when the audio playback has been resumed', function(done) {
+      var eventEmitter = new EventEmitter();
+
+      // Wait until the audio is paused to start it
+      eventEmitter.on('start', function() {
+        audioLib.pause(eventEmitter);
+      });
+      eventEmitter.on('pause', function() {
+        audioLib.resume(eventEmitter);
+      });
+      eventEmitter.on('resume', function() {
+        done();
+      });
+
+      audioLib.play(eventEmitter, 'test/audio/splashing_around.mp3');
+    });
+
+    it('emits an error event when audio playback has not been started', function(done) {
+      var eventEmitter = new EventEmitter();
+
+      eventEmitter.on('error', function(err) {
+        expect(err.message).to.equal('no audio playback to resume');
+        done();
+      });
+
+      audioLib.resume(eventEmitter, 'test/audio/splashing_around.mp3');
+    });
+
+    it('emits an error event when an EventEmitter is not passed to it', function(done) {
+      try {
+        audioLib.resume();
       }
       catch(err) {
         expect(err).to.exist;
