@@ -1,15 +1,15 @@
 'use strict';
 
 var expect = require('chai').expect;
-var Jukebox = require('../index.js');
+var Troubadour = require('../index.js');
 
-describe('Jukebox (index.js)', function() {
+describe('Troubadour (index.js)', function() {
 
   describe('Constructor', function() {
 
     it('throws an error when it is not passed the name of a audio player library', function(done) {
       try {
-        var jukebox = new Jukebox();
+        var troubadour = new Troubadour();
       }
       catch(err) {
         expect(err).to.exist;
@@ -20,7 +20,7 @@ describe('Jukebox (index.js)', function() {
 
     it('throws an error when it is passsed the name of a non-supported audio player library', function(done) {
       try {
-        var jukebox = new Jukebox('pikachu');
+        var troubadour = new Troubadour('pikachu');
       }
       catch(err) {
         expect(err).to.exist;
@@ -38,57 +38,57 @@ describe('Jukebox (index.js)', function() {
        the library is invoked */
 
     it('emits an error when it is not passed a filepath', function(done) {
-      var jukebox = new Jukebox('sox');
-      jukebox.on('error', function(err) {
+      var troubadour = new Troubadour('sox');
+      troubadour.on('error', function(err) {
         expect(err).to.exist;
         expect(err.message).to.equal('filepath not specified');
         done();
       });
-      jukebox.play();
+      troubadour.play();
     });
 
     it('emits an error when another command is injected (;)', function(done) {
-      var jukebox = new Jukebox('sox');
-      jukebox.on('error', function(err) {
+      var troubadour = new Troubadour('sox');
+      troubadour.on('error', function(err) {
         expect(err).to.exist;
         expect(err.message).to.equal('invalid filepath');
         done();
       });
-      jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
+      troubadour.play('test/audio/splashing_around.mp3; echo "hacked"');
     });
 
     it('emits an error when another command is injected (&&)', function(done) {
-      var jukebox = new Jukebox('sox');
-      jukebox.on('error', function(err) {
+      var troubadour = new Troubadour('sox');
+      troubadour.on('error', function(err) {
         expect(err).to.exist;
         expect(err.message).to.equal('invalid filepath');
         done();
       });
-      jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
+      troubadour.play('test/audio/splashing_around.mp3; echo "hacked"');
     });
 
     it('emits an error when another command is injected (||)', function(done) {
-      var jukebox = new Jukebox('sox');
-      jukebox.on('error', function(err) {
+      var troubadour = new Troubadour('sox');
+      troubadour.on('error', function(err) {
         expect(err).to.exist;
         expect(err.message).to.equal('invalid filepath');
         done();
       });
-      jukebox.play('test/audio/splashing_around.mp3; echo "hacked"');
+      troubadour.play('test/audio/splashing_around.mp3; echo "hacked"');
     });
 
     it('emits an error when pased a bad location', function(done) {
-      var jukebox = new Jukebox('sox');
-      jukebox.on('error', function(err) {
+      var troubadour = new Troubadour('sox');
+      troubadour.on('error', function(err) {
         expect(err).to.exist;
         expect(err.message).to.equal('filepath not found');
         done();
       });
-      jukebox.play('badfilepath');
+      troubadour.play('badfilepath');
     });
 
   });
 
-  // No need to test Pause or Stop here, since both functions only call the audio player library
+  // No need to test Pause, Stop, or Resume here, since they only call the audio player library
 
 });

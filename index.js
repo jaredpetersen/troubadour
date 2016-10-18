@@ -4,7 +4,7 @@ var EventEmitter = require('events');
 var process = require('child_process');
 var fs = require('fs');
 
-class Jukebox extends EventEmitter {
+class Troubadour extends EventEmitter {
 
   constructor(audioPlayer) {
     super();
@@ -54,4 +54,4 @@ class Jukebox extends EventEmitter {
 }
 
 // Export the module
-module.exports = Jukebox;
+module.exports = Troubadour;
