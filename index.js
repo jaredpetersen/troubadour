@@ -47,6 +47,10 @@ class Jukebox extends EventEmitter {
     this.audioPlayerLib.stop(this);
   }
 
+  resume() {
+    this.audioPlayerLib.resume(this);
+  }
+
 }
 
 // Export the module
