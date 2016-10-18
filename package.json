@@ -1,14 +1,14 @@
 {
-  "name": "jukebox",
+  "name": "troubadour",
   "version": "0.0.1",
-  "description": "Server-side audio player",
+  "description": "Node.js Audio Player",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --timeout 10000"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaredpetersen/jukebox.git"
+    "url": "https://github.com/jaredpetersen/troubadour.git"
   },
   "keywords": [
     "audio",
@@ -19,9 +19,9 @@
   "author": "Jared Petersen <jaredtoddpetersen@gmail.com> (https://github.com/jaredpetersen)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jaredpetersen/jukebox/issues"
+    "url": "https://github.com/jaredpetersen/troubadour/issues"
   },
-  "homepage": "https://github.com/jaredpetersen/jukebox",
+  "homepage": "https://github.com/jaredpetersen/troubadour",
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.0.2"

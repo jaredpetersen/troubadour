@@ -1,6 +1,6 @@
 'use strict';
 
-var Jukebox = require('../index.js');
+var Troubadour = require('../index.js');
 var expect = require('chai').expect;
 
 exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
@@ -8,24 +8,23 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
   describe('Play', function() {
 
     it('emits a start event when the audio starts playing', function(done) {
-      var jukebox = new Jukebox(audioLib);
+      var troubadour = new Troubadour(audioLib);
 
-      jukebox.on('start', function() {
+      troubadour.on('start', function() {
         done();
       });
 
-      jukebox.play('test/audio/splashing_around.mp3');
+      troubadour.play('test/audio/splashing_around.mp3');
     });
 
     it('emits an end event when the audio finishes playing', function(done) {
-      this.timeout(10000);
-      var jukebox = new Jukebox(audioLib);
+      var troubadour = new Troubadour(audioLib);
 
-      jukebox.on('end', function() {
+      troubadour.on('end', function() {
         done();
       });
 
-      jukebox.play('test/audio/alarm_clock.mp3');
+      troubadour.play('test/audio/alarm_clock.mp3');
     });
 
   });
@@ -33,28 +32,28 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
   describe('Pause', function() {
 
     it('emits a pause event when the audio is paused', function(done) {
-      var jukebox = new Jukebox(audioLib);
+      var troubadour = new Troubadour(audioLib);
 
       // Wait until the audio starts to pause it
-      jukebox.on('start', function() {
-        jukebox.pause();
+      troubadour.on('start', function() {
+        troubadour.pause();
       });
-      jukebox.on('pause', function() {
+      troubadour.on('pause', function() {
         done();
       });
 
-      jukebox.play('test/audio/splashing_around.mp3');
+      troubadour.play('test/audio/splashing_around.mp3');
     });
 
     it('emits an error event when audio playback has not been started', function(done) {
-      var jukebox = new Jukebox(audioLib);
+      var troubadour = new Troubadour(audioLib);
 
-      jukebox.on('error', function(err) {
+      troubadour.on('error', function(err) {
         expect(err.message).to.equal('no audio playback to pause');
         done();
       });
 
-      jukebox.pause();
+      troubadour.pause();
     });
 
     it('emits an error event when audio playback is not ongoing');
@@ -64,28 +63,28 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
   describe('Stop', function() {
 
     it('emits a stop event when the audio is stopped', function(done) {
-      var jukebox = new Jukebox(audioLib);
+      var troubadour = new Troubadour(audioLib);
 
       // Wait until the audio starts to stop it
-      jukebox.on('start', function() {
-        jukebox.stop();
+      troubadour.on('start', function() {
+        troubadour.stop();
       });
-      jukebox.on('stop', function() {
+      troubadour.on('stop', function() {
         done();
       });
 
-      jukebox.play('test/audio/splashing_around.mp3');
+      troubadour.play('test/audio/splashing_around.mp3');
     });
 
     it('emits an error event when audio playback has not been started', function(done) {
-      var jukebox = new Jukebox(audioLib);
+      var troubadour = new Troubadour(audioLib);
 
-      jukebox.on('error', function(err) {
+      troubadour.on('error', function(err) {
         expect(err.message).to.equal('no audio playback to stop');
         done();
       });
 
-      jukebox.stop();
+      troubadour.stop();
     });
 
     it('emits an error event when audio playback is not ongoing');
@@ -96,32 +95,32 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
   describe('Resume', function() {
 
     it('emits a resume event when the audio is resumed', function(done) {
-      var jukebox = new Jukebox(audioLib);
+      var troubadour = new Troubadour(audioLib);
 
       // Wait until the audio pauses to resume it
-      jukebox.on('start', function() {
-        jukebox.pause();
+      troubadour.on('start', function() {
+        troubadour.pause();
       });
-      jukebox.on('pause', function() {
-        jukebox.resume();
+      troubadour.on('pause', function() {
+        troubadour.resume();
       });
-      jukebox.on('resume', function() {
+      troubadour.on('resume', function() {
         done();
       });
 
-      jukebox.play('test/audio/splashing_around.mp3');
+      troubadour.play('test/audio/splashing_around.mp3');
     });
 
     it('emits an error event when audio playback has not been started', function(done) {
-      var jukebox = new Jukebox(audioLib);
+      var troubadour = new Troubadour(audioLib);
 
       // Listen for the error event
-      jukebox.on('error', function(err) {
+      troubadour.on('error', function(err) {
         expect(err.message).to.equal('no audio playback to resume');
         done();
       });
 
-      jukebox.resume();
+      troubadour.resume();
     });
 
   });
