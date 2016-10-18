@@ -61,6 +61,17 @@ troubadour.on('stop', function() {
 troubadour.stop();
 ```
 
+### Resume
+Resume the playback from a paused state by using the `resume` function:
+
+```javascript
+troubadour.on('resume', function() {
+  // Do something here when the audio is resumed
+});
+
+troubadour.resume();
+```
+
 ### Errors
 Troubadour handles errors in two different ways: abruptly throwing an error when the error is not recoverable or gracefully emitting the error when it is recoverable.
 
