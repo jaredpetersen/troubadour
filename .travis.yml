@@ -6,3 +6,6 @@ addons:
     packages:
       - sox
       - libsox-fmt-all
+branches:
+  only:
+    - master
