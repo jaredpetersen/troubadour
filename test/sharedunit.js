@@ -1,15 +1,15 @@
 'use strict';
 
-var expect = require('chai').expect;
-var process = require('child_process');
-var EventEmitter = require('events').EventEmitter;
+const expect = require('chai').expect;
+const process = require('child_process');
+const EventEmitter = require('events').EventEmitter;
 
 exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
 
   describe('Play', () => {
 
     it('emits a start event when the audio starts playing', (done) => {
-      var eventEmitter = new EventEmitter();
+      const eventEmitter = new EventEmitter();
 
       eventEmitter.on('start', () => {
         done();
@@ -19,7 +19,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     });
 
     it('emits an end event when the audio finishes playing', (done) => {
-      var eventEmitter = new EventEmitter();
+      const eventEmitter = new EventEmitter();
 
       eventEmitter.on('end', () => {
         done();
@@ -40,7 +40,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     });
 
     it('throws an error when a filepath is not passed to it', (done) => {
-      var eventEmitter = new EventEmitter();
+      const eventEmitter = new EventEmitter();
 
       try {
         audioLib.play(eventEmitter);
@@ -68,7 +68,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
   describe('Pause', () => {
 
     it('emits a pause event when the audio is paused', (done) => {
-      var eventEmitter = new EventEmitter();
+      const eventEmitter = new EventEmitter();
 
       // Wait until the audio starts to pause it
       eventEmitter.on('start', () => {
@@ -82,7 +82,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     });
 
     it('emits an error event when audio playback has not been started', (done) => {
-      var eventEmitter = new EventEmitter();
+      const eventEmitter = new EventEmitter();
 
       eventEmitter.on('error', (err) => {
         expect(err.message).to.equal('no audio playback to pause');
@@ -110,7 +110,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
   describe('Stop', () => {
 
     it('emits a stop event when the audio playback has been stopped', (done) => {
-      var eventEmitter = new EventEmitter();
+      const eventEmitter = new EventEmitter();
 
       // Wait until the audio starts to stop it
       eventEmitter.on('start', () => {
@@ -124,7 +124,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     });
 
     it('emits an error event when audio playback has not been started', (done) => {
-      var eventEmitter = new EventEmitter();
+      const eventEmitter = new EventEmitter();
 
       eventEmitter.on('error', (err) => {
         expect(err.message).to.equal('no audio playback to stop');
@@ -152,7 +152,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
   describe('Resume', () => {
 
     it('emits a resume event when the audio playback has been resumed', (done) => {
-      var eventEmitter = new EventEmitter();
+      const eventEmitter = new EventEmitter();
 
       // Wait until the audio is paused to start it
       eventEmitter.on('start', () => {
@@ -169,7 +169,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     });
 
     it('emits an error event when audio playback has not been started', (done) => {
-      var eventEmitter = new EventEmitter();
+      const eventEmitter = new EventEmitter();
 
       eventEmitter.on('error', (err) => {
         expect(err.message).to.equal('no audio playback to resume');

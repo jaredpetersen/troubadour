@@ -1,11 +1,11 @@
 'use strict';
 
-var process = require('child_process');
-var sharedunit = require('./sharedunit');
-var sharedint = require('./sharedint');
+const process = require('child_process');
+const sharedunit = require('./sharedunit');
+const sharedint = require('./sharedint');
 
 // Audio libraries
-var sox = require('../lib/sox.js');
+const sox = require('../lib/sox.js');
 
 describe('Audio Player Libraries (audiolibint.js)', () => {
 

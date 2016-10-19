@@ -14,8 +14,8 @@ Since Troubadour only supports Sox at the moment, you will need to install Sox i
 To get started, require the module in your program and create a new Troubadour instance by passing the name of the supported audio player into the constructor.
 
 ```javascript
-var Troubadour = require('troubadour');
-var troubadour = new Troubadour('sox');
+const Troubadour = require('troubadour');
+const troubadour = new Troubadour('sox');
 ```
 
 Troubadour is an [event emitter](https://nodejs.org/api/events.html) that indicates when certain actions are being performed by the audio player. The following code snippet shows how to add an event listener to your new `troubadour` player.

@@ -1,8 +1,8 @@
 'use strict';
 
-var EventEmitter = require('events');
-var process = require('child_process');
-var fs = require('fs');
+const EventEmitter = require('events');
+const process = require('child_process');
+const fs = require('fs');
 
 class Troubadour extends EventEmitter {
 

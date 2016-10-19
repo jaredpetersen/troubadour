@@ -1,7 +1,7 @@
 'use strict';
 
-var expect = require('chai').expect;
-var Troubadour = require('../index.js');
+const expect = require('chai').expect;
+const Troubadour = require('../index.js');
 
 describe('Troubadour (index.js)', () => {
 
@@ -9,7 +9,7 @@ describe('Troubadour (index.js)', () => {
 
     it('throws an error when it is not passed the name of a audio player library', (done) => {
       try {
-        var troubadour = new Troubadour();
+        const troubadour = new Troubadour();
       }
       catch(err) {
         expect(err).to.exist;
@@ -20,7 +20,7 @@ describe('Troubadour (index.js)', () => {
 
     it('throws an error when it is passsed the name of a non-supported audio player library', (done) => {
       try {
-        var troubadour = new Troubadour('pikachu');
+        const troubadour = new Troubadour('pikachu');
       }
       catch(err) {
         expect(err).to.exist;
@@ -38,7 +38,7 @@ describe('Troubadour (index.js)', () => {
        the library is invoked */
 
     it('emits an error when it is not passed a filepath', (done) => {
-      var troubadour = new Troubadour('sox');
+      const troubadour = new Troubadour('sox');
 
       troubadour.on('error', (err) => {
         expect(err).to.exist;
@@ -50,7 +50,7 @@ describe('Troubadour (index.js)', () => {
     });
 
     it('emits an error when another command is injected (;)', (done) => {
-      var troubadour = new Troubadour('sox');
+      const troubadour = new Troubadour('sox');
 
       troubadour.on('error', (err) => {
         expect(err).to.exist;
@@ -62,7 +62,7 @@ describe('Troubadour (index.js)', () => {
     });
 
     it('emits an error when another command is injected (&&)', (done) => {
-      var troubadour = new Troubadour('sox');
+      const troubadour = new Troubadour('sox');
 
       troubadour.on('error', (err) => {
         expect(err).to.exist;
@@ -74,7 +74,7 @@ describe('Troubadour (index.js)', () => {
     });
 
     it('emits an error when another command is injected (||)', (done) => {
-      var troubadour = new Troubadour('sox');
+      const troubadour = new Troubadour('sox');
 
       troubadour.on('error', (err) => {
         expect(err).to.exist;
@@ -86,7 +86,7 @@ describe('Troubadour (index.js)', () => {
     });
 
     it('emits an error when pased a bad location', (done) => {
-      var troubadour = new Troubadour('sox');
+      const troubadour = new Troubadour('sox');
 
       troubadour.on('error', (err) => {
         expect(err).to.exist;
