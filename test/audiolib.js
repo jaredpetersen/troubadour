@@ -1,26 +1,29 @@
 'use strict';
 
-var process = require('child_process');
-var sharedunit = require('./sharedunit');
-var sharedint = require('./sharedint');
+const process = require('child_process');
+const sharedunit = require('./sharedunit');
+const sharedint = require('./sharedint');
 
-describe('Audio Player Libraries (audiolibint.js)', function() {
+// Audio libraries
+const sox = require('../lib/sox.js');
+
+describe('Audio Player Libraries (audiolibint.js)', () => {
 
   // Kill off all of the running audio processes
-  afterEach(function() {
+  afterEach(() => {
     try {
       process.execSync('pkill -9 play');
     }
     catch(err) {}
   });
 
-  describe('Sox', function() {
+  describe('Sox', () => {
 
-    describe('Unit', function() {
-      sharedunit.shouldBehaveLikeAnAudioLib(require('../lib/sox.js'));
+    describe('Unit', () => {
+      sharedunit.shouldBehaveLikeAnAudioLib(sox);
     });
 
-    describe('Integration', function() {
+    describe('Integration', () => {
       sharedint.shouldBehaveLikeAnAudioLib('sox');
     });
 

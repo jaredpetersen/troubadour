@@ -1,26 +1,26 @@
 'use strict';
 
-var Troubadour = require('../index.js');
-var expect = require('chai').expect;
+const Troubadour = require('../index.js');
+const expect = require('chai').expect;
 
-exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
+exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
 
-  describe('Play', function() {
+  describe('Play', () => {
 
-    it('emits a start event when the audio starts playing', function(done) {
-      var troubadour = new Troubadour(audioLib);
+    it('emits a start event when the audio starts playing', (done) => {
+      const troubadour = new Troubadour(audioLib);
 
-      troubadour.on('start', function() {
+      troubadour.on('start', () => {
         done();
       });
 
       troubadour.play('test/audio/splashing_around.mp3');
     });
 
-    it('emits an end event when the audio finishes playing', function(done) {
-      var troubadour = new Troubadour(audioLib);
+    it('emits an end event when the audio finishes playing', (done) => {
+      const troubadour = new Troubadour(audioLib);
 
-      troubadour.on('end', function() {
+      troubadour.on('end', () => {
         done();
       });
 
@@ -29,26 +29,26 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
   });
 
-  describe('Pause', function() {
+  describe('Pause', () => {
 
-    it('emits a pause event when the audio is paused', function(done) {
-      var troubadour = new Troubadour(audioLib);
+    it('emits a pause event when the audio is paused', (done) => {
+      const troubadour = new Troubadour(audioLib);
 
       // Wait until the audio starts to pause it
-      troubadour.on('start', function() {
+      troubadour.on('start', () => {
         troubadour.pause();
       });
-      troubadour.on('pause', function() {
+      troubadour.on('pause', () => {
         done();
       });
 
       troubadour.play('test/audio/splashing_around.mp3');
     });
 
-    it('emits an error event when audio playback has not been started', function(done) {
-      var troubadour = new Troubadour(audioLib);
+    it('emits an error event when audio playback has not been started', (done) => {
+      const troubadour = new Troubadour(audioLib);
 
-      troubadour.on('error', function(err) {
+      troubadour.on('error', (err) => {
         expect(err.message).to.equal('no audio playback to pause');
         done();
       });
@@ -60,26 +60,26 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
 
   });
 
-  describe('Stop', function() {
+  describe('Stop', () => {
 
-    it('emits a stop event when the audio is stopped', function(done) {
-      var troubadour = new Troubadour(audioLib);
+    it('emits a stop event when the audio is stopped', (done) => {
+      const troubadour = new Troubadour(audioLib);
 
       // Wait until the audio starts to stop it
-      troubadour.on('start', function() {
+      troubadour.on('start', () => {
         troubadour.stop();
       });
-      troubadour.on('stop', function() {
+      troubadour.on('stop', () => {
         done();
       });
 
       troubadour.play('test/audio/splashing_around.mp3');
     });
 
-    it('emits an error event when audio playback has not been started', function(done) {
-      var troubadour = new Troubadour(audioLib);
+    it('emits an error event when audio playback has not been started', (done) => {
+      const troubadour = new Troubadour(audioLib);
 
-      troubadour.on('error', function(err) {
+      troubadour.on('error', (err) => {
         expect(err.message).to.equal('no audio playback to stop');
         done();
       });
@@ -92,30 +92,30 @@ exports.shouldBehaveLikeAnAudioLib = function(audioLib) {
   });
 
 
-  describe('Resume', function() {
+  describe('Resume', () => {
 
-    it('emits a resume event when the audio is resumed', function(done) {
-      var troubadour = new Troubadour(audioLib);
+    it('emits a resume event when the audio is resumed', (done) => {
+      const troubadour = new Troubadour(audioLib);
 
       // Wait until the audio pauses to resume it
-      troubadour.on('start', function() {
+      troubadour.on('start', () => {
         troubadour.pause();
       });
-      troubadour.on('pause', function() {
+      troubadour.on('pause', () => {
         troubadour.resume();
       });
-      troubadour.on('resume', function() {
+      troubadour.on('resume', () => {
         done();
       });
 
       troubadour.play('test/audio/splashing_around.mp3');
     });
 
-    it('emits an error event when audio playback has not been started', function(done) {
-      var troubadour = new Troubadour(audioLib);
+    it('emits an error event when audio playback has not been started', (done) => {
+      const troubadour = new Troubadour(audioLib);
 
       // Listen for the error event
-      troubadour.on('error', function(err) {
+      troubadour.on('error', (err) => {
         expect(err.message).to.equal('no audio playback to resume');
         done();
       });

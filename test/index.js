@@ -1,15 +1,15 @@
 'use strict';
 
-var expect = require('chai').expect;
-var Troubadour = require('../index.js');
+const expect = require('chai').expect;
+const Troubadour = require('../index.js');
 
-describe('Troubadour (index.js)', function() {
+describe('Troubadour (index.js)', () => {
 
-  describe('Constructor', function() {
+  describe('Constructor', () => {
 
-    it('throws an error when it is not passed the name of a audio player library', function(done) {
+    it('throws an error when it is not passed the name of a audio player library', (done) => {
       try {
-        var troubadour = new Troubadour();
+        const troubadour = new Troubadour();
       }
       catch(err) {
         expect(err).to.exist;
@@ -18,9 +18,9 @@ describe('Troubadour (index.js)', function() {
       }
     });
 
-    it('throws an error when it is passsed the name of a non-supported audio player library', function(done) {
+    it('throws an error when it is passsed the name of a non-supported audio player library', (done) => {
       try {
-        var troubadour = new Troubadour('pikachu');
+        const troubadour = new Troubadour('pikachu');
       }
       catch(err) {
         expect(err).to.exist;
@@ -31,59 +31,69 @@ describe('Troubadour (index.js)', function() {
 
   });
 
-  describe('Play', function() {
+  describe('Play', () => {
 
     /* A lot of these test use sox for the audio player library, but integration
        with sox is not actually being tested here, just the functionality before
        the library is invoked */
 
-    it('emits an error when it is not passed a filepath', function(done) {
-      var troubadour = new Troubadour('sox');
-      troubadour.on('error', function(err) {
+    it('emits an error when it is not passed a filepath', (done) => {
+      const troubadour = new Troubadour('sox');
+
+      troubadour.on('error', (err) => {
         expect(err).to.exist;
         expect(err.message).to.equal('filepath not specified');
         done();
       });
+
       troubadour.play();
     });
 
-    it('emits an error when another command is injected (;)', function(done) {
-      var troubadour = new Troubadour('sox');
-      troubadour.on('error', function(err) {
+    it('emits an error when another command is injected (;)', (done) => {
+      const troubadour = new Troubadour('sox');
+
+      troubadour.on('error', (err) => {
         expect(err).to.exist;
         expect(err.message).to.equal('invalid filepath');
         done();
       });
+
       troubadour.play('test/audio/splashing_around.mp3; echo "hacked"');
     });
 
-    it('emits an error when another command is injected (&&)', function(done) {
-      var troubadour = new Troubadour('sox');
-      troubadour.on('error', function(err) {
+    it('emits an error when another command is injected (&&)', (done) => {
+      const troubadour = new Troubadour('sox');
+
+      troubadour.on('error', (err) => {
         expect(err).to.exist;
         expect(err.message).to.equal('invalid filepath');
         done();
       });
+
       troubadour.play('test/audio/splashing_around.mp3; echo "hacked"');
     });
 
-    it('emits an error when another command is injected (||)', function(done) {
-      var troubadour = new Troubadour('sox');
-      troubadour.on('error', function(err) {
+    it('emits an error when another command is injected (||)', (done) => {
+      const troubadour = new Troubadour('sox');
+
+      troubadour.on('error', (err) => {
         expect(err).to.exist;
         expect(err.message).to.equal('invalid filepath');
         done();
       });
+
       troubadour.play('test/audio/splashing_around.mp3; echo "hacked"');
     });
 
-    it('emits an error when pased a bad location', function(done) {
-      var troubadour = new Troubadour('sox');
-      troubadour.on('error', function(err) {
+    it('emits an error when pased a bad location', (done) => {
+      const troubadour = new Troubadour('sox');
+
+      troubadour.on('error', (err) => {
         expect(err).to.exist;
         expect(err.message).to.equal('filepath not found');
         done();
       });
+
       troubadour.play('badfilepath');
     });
 

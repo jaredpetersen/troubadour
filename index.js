@@ -1,8 +1,8 @@
 'use strict';
 
-var EventEmitter = require('events');
-var process = require('child_process');
-var fs = require('fs');
+const EventEmitter = require('events');
+const process = require('child_process');
+const fs = require('fs');
 
 class Troubadour extends EventEmitter {
 
@@ -13,7 +13,7 @@ class Troubadour extends EventEmitter {
     if (audioPlayer == null) {
       throw new Error('audio library not specified');
     }
-    else if (audioPlayer.toLowerCase() == 'sox') {
+    else if (audioPlayer.toLowerCase() === 'sox') {
       this.audioPlayerLib = require('./lib/sox.js');
     }
     else {
@@ -31,7 +31,7 @@ class Troubadour extends EventEmitter {
       this.emit('error', new Error('invalid filepath'));
       return;
     }
-    else if(fs.existsSync(filepath) == false) {
+    else if(fs.existsSync(filepath) === false) {
       this.emit('error', new Error('filepath not found'));
       return;
     }
