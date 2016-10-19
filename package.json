@@ -4,7 +4,7 @@
   "description": "Node.js Audio Player",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec --timeout 10000"
+    "test": "./node_modules/.bin/mocha --reporter spec --timeout 30000"
   },
   "repository": {
     "type": "git",
@@ -14,7 +14,8 @@
     "audio",
     "sound",
     "music",
-    "player"
+    "player",
+    "sox"
   ],
   "author": "Jared Petersen <jaredtoddpetersen@gmail.com> (https://github.com/jaredpetersen)",
   "license": "MIT",

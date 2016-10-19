@@ -21,19 +21,23 @@ var troubadour = new Troubadour('sox');
 Troubadour is an [event emitter](https://nodejs.org/api/events.html) that indicates when certain actions are being performed by the audio player. The following code snippet shows how to add an event listener to your new `troubadour` player.
 
 ```javascript
-troubadour.on('eventname', function() {
+troubadour.on('eventname', () => {
   // Event listener function
 });
 ```
 
-You do not need to have listeners set up in order to use Troubadour but they provide a programmatic way of defining actions that you would like to take when the audio playback starts, pauses, stops, resumes, etc.
+You do not need to have listeners set up in order to use Troubadour but they provide a programmatic way of defining actions that you would like to take when the audio playback starts, pauses, stops, resumes, ends, and errors.
 
 ### Play
 To play an audio source, use the `play` function and pass in the file path of the audio source that is to be played:
 
 ```javascript
-troubadour.on('start', function() {
+troubadour.on('start', () => {
   // Do something here when the audio starts playing
+});
+
+troubadour.on('end', () => {
+  // Do something here when the audio finishes playing
 });
 
 troubadour.play('~/Music/audiofile.mp3');
@@ -43,7 +47,7 @@ troubadour.play('~/Music/audiofile.mp3');
 Pause the playback (with the ability to resume later) by using the `pause` function:
 
 ```javascript
-troubadour.on('pause', function() {
+troubadour.on('pause', () => {
   // Do something here when the audio is paused
 });
 
@@ -54,7 +58,7 @@ troubadour.pause();
 Stop the playback (without the ability to resume later) by using the `stop` function:
 
 ```javascript
-troubadour.on('stop', function() {
+troubadour.on('stop', () => {
   // Do something here when the audio is paused
 });
 
@@ -65,7 +69,7 @@ troubadour.stop();
 Resume the playback from a paused state by using the `resume` function:
 
 ```javascript
-troubadour.on('resume', function() {
+troubadour.on('resume', () => {
   // Do something here when the audio is resumed
 });
 
@@ -80,7 +84,7 @@ Errors like not passing the name of a supported command-line audio player to the
 The error listener can be set up by including the following:
 
 ```javascript
-troubadour.on('error', function(error) {
+troubadour.on('error', (error) => {
   // Do something here to handle the errors
 });
 ```
