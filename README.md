@@ -1,5 +1,5 @@
 # Troubadour
-[![Build Status](https://travis-ci.com/jaredpetersen/troubadour.svg?token=U58FHdxksYsWZzj98oVM&branch=master)](https://travis-ci.com/jaredpetersen/troubadour)
+[![Build Status](https://travis-ci.org/jaredpetersen/troubadour.svg?branch=master)](https://travis-ci.org/jaredpetersen/troubadour)
 
 Troubadour is wrapper over command-line audio players that makes it easy to play audio in Node.js. At this point, only Sox is supported but other audio players can easily be added.
 
