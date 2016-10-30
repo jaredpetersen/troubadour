@@ -1,9 +1,9 @@
 'use strict';
 
 const expect = require('chai').expect;
-const Troubadour = require('../index.js');
+const Troubadour = require('../../index.js');
 
-describe('Troubadour (index.js)', () => {
+describe('Index (Integration)', () => {
 
   describe('Constructor', () => {
 

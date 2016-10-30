@@ -1,6 +1,6 @@
 'use strict';
 
-const Troubadour = require('../index.js');
+const Troubadour = require('../../index.js');
 const expect = require('chai').expect;
 
 exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
