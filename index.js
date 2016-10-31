@@ -1,11 +1,11 @@
 'use strict';
 
-const Eventthis = require('events');
-const process = require('child_process');
+const EventEmitter = require('events');
+let process = require('child_process');
 const fs = require('fs');
 const audioLibs = require('./lib/audioLibs');
 
-class Troubadour extends Eventthis {
+class Troubadour extends EventEmitter {
 
   constructor(audioPlayer) {
     super();
@@ -43,7 +43,7 @@ class Troubadour extends Eventthis {
       this.emit('error', new Error('filepath not found'));
     }
     else {
-      this.audioProcess = this.audioPlayerLib.play(this, this.audioProcess, filepath);
+      this.audioProcess = this.audioPlayerLib.play(this, filepath);
     }
   }
 

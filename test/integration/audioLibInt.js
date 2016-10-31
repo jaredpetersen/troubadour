@@ -27,6 +27,8 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
       troubadour.play('test/audio/alarm_clock.mp3');
     });
 
+    it('emits an error event when the audio encounters an error');
+
   });
 
   describe('Pause', () => {
@@ -90,7 +92,6 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     it('emits an error event when audio playback is not ongoing');
 
   });
-
 
   describe('Resume', () => {
 
