@@ -1,6 +1,6 @@
 'use strict';
 
-const Troubadour = require('../index.js');
+const Troubadour = require('../../index.js');
 const expect = require('chai').expect;
 
 exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
@@ -26,6 +26,8 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
 
       troubadour.play('test/audio/alarm_clock.mp3');
     });
+
+    it('emits an error event when the audio encounters an error');
 
   });
 
@@ -90,7 +92,6 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     it('emits an error event when audio playback is not ongoing');
 
   });
-
 
   describe('Resume', () => {
 

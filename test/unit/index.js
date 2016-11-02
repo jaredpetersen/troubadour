@@ -1,9 +1,9 @@
 'use strict';
 
 const expect = require('chai').expect;
-const Troubadour = require('../index.js');
+const Troubadour = require('../../index.js');
 
-describe('Troubadour (index.js)', () => {
+describe('Index (Unit)', () => {
 
   describe('Constructor', () => {
 
@@ -32,10 +32,6 @@ describe('Troubadour (index.js)', () => {
   });
 
   describe('Play', () => {
-
-    /* A lot of these test use sox for the audio player library, but integration
-       with sox is not actually being tested here, just the functionality before
-       the library is invoked */
 
     it('emits an error when it is not passed a filepath', (done) => {
       const troubadour = new Troubadour('sox');
@@ -99,6 +95,68 @@ describe('Troubadour (index.js)', () => {
 
   });
 
-  // No need to test Pause, Stop, or Resume here, since they only call the audio player library
+  describe('Pause', () => {
+
+    it('emits a pause event when the audio is paused');
+
+    it('sends a SIGSTOP signal to the audio process to pause it');
+
+    it('emits an error when there is no audio playback to pause', (done) => {
+      const troubadour = new Troubadour('sox');
+
+      troubadour.on('error', (err) => {
+        expect(err).to.exist;
+        expect(err.message).to.equal('no audio playback to pause');
+        done();
+      });
+
+      troubadour.pause();
+    });
+
+    it('emits an error event when audio playback is not ongoing');
+
+  });
+
+  describe('Stop', () => {
+
+    it('emits a stop event when the audio is stopped');
+
+    it('sends a kill signal to the audio process to stop it');
+
+    it('emits an error when there is no audio playback to stop', (done) => {
+      const troubadour = new Troubadour('sox');
+
+      troubadour.on('error', (err) => {
+        expect(err).to.exist;
+        expect(err.message).to.equal('no audio playback to stop');
+        done();
+      });
+
+      troubadour.stop();
+    });
+
+    it('emits an error event when audio playback is not ongoing');
+
+  });
+
+  describe('Resume', () => {
+
+    it('emits an error when there is no audio playback to resume', (done) => {
+      const troubadour = new Troubadour('sox');
+
+      troubadour.on('error', (err) => {
+        expect(err).to.exist;
+        expect(err.message).to.equal('no audio playback to resume');
+        done();
+      });
+
+      troubadour.resume();
+    });
+
+    it('sends a SIGCONT signal to the audio process to resume it');
+
+    it('emits an error event when audio playback is not ongoing');
+
+  });
 
 });
