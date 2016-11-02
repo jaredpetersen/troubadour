@@ -33,10 +33,6 @@ describe('Index (Unit)', () => {
 
   describe('Play', () => {
 
-    it('emits a start event when the audio starts playing');
-
-    it('emits an end event when the audio finishes playing');
-
     it('emits an error when it is not passed a filepath', (done) => {
       const troubadour = new Troubadour('sox');
 
