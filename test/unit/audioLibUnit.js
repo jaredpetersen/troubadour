@@ -55,6 +55,10 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     // TODO Figure out how to mock a process using rewire
     it('emits an error event when something goes wrong with the audio process');
 
+    it('emits an end event when the audio process ends playback');
+
+    it('emits a start event when the audio process starts playback');
+
     it('removes the start listener on the audio process when the audio process starts playback');
 
     it('removes the end listener on the audio process when the audio process ends playback');

@@ -6,6 +6,7 @@ addons:
     packages:
       - sox
       - libsox-fmt-all
+      - mpg123
 branches:
   only:
     - master

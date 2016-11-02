@@ -1,29 +1,31 @@
 'use strict';
 
 const process = require('child_process');
-const rewire = require('rewire');
+const audioLibs = require('../lib/audioLibs');
 const sharedunit = require('./unit/audioLibUnit');
 const sharedint = require('./integration/audioLibInt');
 
 // Audio libraries
-const sox = rewire('../lib/sox.js');
+audioLibs.forEach((lib) => {
 
-describe('Sox', () => {
+  describe(lib.name, () => {
 
-  // Kill off all of the running audio processes
-  afterEach(() => {
-    try {
-      process.execSync('pkill -9 play');
-    }
-    catch(err) {}
-  });
+    // Kill off all of the running audio processes
+    afterEach(() => {
+      try {
+        process.execSync('pkill -9 ' + lib.command);
+      }
+      catch(err) {}
+    });
 
-  describe('Unit', () => {
-    sharedunit.shouldBehaveLikeAnAudioLib(sox);
-  });
+    describe('Unit', () => {
+      sharedunit.shouldBehaveLikeAnAudioLib(lib.audioPlayerLibrary);
+    });
 
-  describe('Integration', () => {
-    sharedint.shouldBehaveLikeAnAudioLib('sox');
+    describe('Integration', () => {
+      sharedint.shouldBehaveLikeAnAudioLib(lib.name);
+    });
+
   });
 
 });
