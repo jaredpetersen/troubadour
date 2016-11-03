@@ -13,7 +13,7 @@ audioLibs.forEach((lib) => {
     // Kill off all of the running audio processes
     afterEach(() => {
       try {
-        process.execSync('pkill -9 ' + lib.command);
+        process.execSync('pkill -9 ' + lib.processName);
       }
       catch(err) {}
     });
