@@ -8,6 +8,7 @@ addons:
       - libsox-fmt-all
       - mpg123
       - cvlc
+      - mplayer
 branches:
   only:
     - master
