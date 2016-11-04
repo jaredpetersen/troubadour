@@ -7,7 +7,7 @@ addons:
       - sox
       - libsox-fmt-all
       - mpg123
-      - cvlc
+      - vlc-nox
       - mplayer
 branches:
   only:

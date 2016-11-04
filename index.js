@@ -3,32 +3,32 @@
 const EventEmitter = require('events');
 let process = require('child_process');
 const fs = require('fs');
-const audioLibs = require('./lib/audioLibs');
+const supportedAudioPlayers = require('./lib/supportedAudioPlayers');
+const audioPlayer = require('./lib/audioPlayer');
 
 class Troubadour extends EventEmitter {
 
-  constructor(audioPlayer) {
+  constructor(audioPlayerName) {
     super();
 
-    // Determine which audio player library to use
-    if (audioPlayer == null) {
-      throw new Error('audio library not specified');
+    // Determine which audio player to use
+    if (audioPlayerName == null) {
+      throw new Error('audio player not specified');
     }
 
     // Set up the audio player process
     this.audioProcess = null;
 
-    // Loop over the available audio player libraries
-    audioLibs.some((lib) => {
-      if (lib.name == audioPlayer) {
-        this.audioPlayerLib = lib.audioPlayerLibrary;
-        return this.audioPlayerLib;
+    // Loop over the supported audio players
+    supportedAudioPlayers.some((player) => {
+      if (player.name == audioPlayerName) {
+        return this.player = player;
       }
     });
 
-    // Confirm the user inputted a supported audio player library
-    if (this.audioPlayerLib == null) {
-      throw new Error('audio library not supported');
+    // Confirm the user inputted a supported audio player
+    if (this.player == null) {
+      throw new Error('audio player not supported');
     }
   }
 
@@ -43,7 +43,7 @@ class Troubadour extends EventEmitter {
       this.emit('error', new Error('filepath not found'));
     }
     else {
-      this.audioProcess = this.audioPlayerLib.play(this, filepath);
+      this.audioProcess = audioPlayer.play(this, this.player.command, this.player.arguments, filepath);
     }
   }
 

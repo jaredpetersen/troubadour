@@ -13,7 +13,7 @@ describe('Index (Unit)', () => {
       }
       catch(err) {
         expect(err).to.exist;
-        expect(err.message).to.equal('audio library not specified');
+        expect(err.message).to.equal('audio player not specified');
         done();
       }
     });
@@ -24,7 +24,7 @@ describe('Index (Unit)', () => {
       }
       catch(err) {
         expect(err).to.exist;
-        expect(err.message).to.equal('audio library not supported');
+        expect(err.message).to.equal('audio player not supported');
         done();
       }
     });

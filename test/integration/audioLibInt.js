@@ -3,12 +3,12 @@
 const Troubadour = require('../../index.js');
 const expect = require('chai').expect;
 
-exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
+exports.shouldBehaveLikeAnAudioPlayer = (audioPlayerName) => {
 
   describe('Play', () => {
 
     it('emits a start event when the audio starts playing', (done) => {
-      const troubadour = new Troubadour(audioLib);
+      const troubadour = new Troubadour(audioPlayerName);
 
       troubadour.on('start', () => {
         done();
@@ -18,7 +18,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     });
 
     it('emits an end event when the audio finishes playing', (done) => {
-      const troubadour = new Troubadour(audioLib);
+      const troubadour = new Troubadour(audioPlayerName);
 
       troubadour.on('end', () => {
         done();
@@ -34,7 +34,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
   describe('Pause', () => {
 
     it('emits a pause event when the audio is paused', (done) => {
-      const troubadour = new Troubadour(audioLib);
+      const troubadour = new Troubadour(audioPlayerName);
 
       // Wait until the audio starts to pause it
       troubadour.on('start', () => {
@@ -48,7 +48,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     });
 
     it('emits an error event when audio playback has not been started', (done) => {
-      const troubadour = new Troubadour(audioLib);
+      const troubadour = new Troubadour(audioPlayerName);
 
       troubadour.on('error', (err) => {
         expect(err.message).to.equal('no audio playback to pause');
@@ -65,7 +65,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
   describe('Stop', () => {
 
     it('emits a stop event when the audio is stopped', (done) => {
-      const troubadour = new Troubadour(audioLib);
+      const troubadour = new Troubadour(audioPlayerName);
 
       // Wait until the audio starts to stop it
       troubadour.on('start', () => {
@@ -79,7 +79,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     });
 
     it('emits an error event when audio playback has not been started', (done) => {
-      const troubadour = new Troubadour(audioLib);
+      const troubadour = new Troubadour(audioPlayerName);
 
       troubadour.on('error', (err) => {
         expect(err.message).to.equal('no audio playback to stop');
@@ -96,7 +96,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
   describe('Resume', () => {
 
     it('emits a resume event when the audio is resumed', (done) => {
-      const troubadour = new Troubadour(audioLib);
+      const troubadour = new Troubadour(audioPlayerName);
 
       // Wait until the audio pauses to resume it
       troubadour.on('start', () => {
@@ -113,7 +113,7 @@ exports.shouldBehaveLikeAnAudioLib = (audioLib) => {
     });
 
     it('emits an error event when audio playback has not been started', (done) => {
-      const troubadour = new Troubadour(audioLib);
+      const troubadour = new Troubadour(audioPlayerName);
 
       // Listen for the error event
       troubadour.on('error', (err) => {

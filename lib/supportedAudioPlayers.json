@@ -1,0 +1,26 @@
+[
+  {
+    "name": "sox",
+    "command": "play",
+    "arguments": [],
+    "processName": "play"
+  },
+  {
+    "name": "mpg123",
+    "command": "mpg123",
+    "arguments": [],
+    "processName": "mpg123"
+  },
+  {
+    "name": "vlc",
+    "command": "cvlc",
+    "arguments": ["--play-and-exit"],
+    "processName": "vlc"
+  },
+  {
+    "name": "mplayer",
+    "command": "mplayer",
+    "arguments": [],
+    "processName": "mplayer"
+  }
+]
