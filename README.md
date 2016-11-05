@@ -1,13 +1,19 @@
 # Troubadour
 [![Build Status](https://travis-ci.org/jaredpetersen/troubadour.svg?branch=master)](https://travis-ci.org/jaredpetersen/troubadour)
 
-Troubadour is wrapper over command-line audio players that makes it easy to play audio in Node.js. At this point, only Sox is supported but other audio players can easily be added.
+Troubadour is wrapper over command-line audio players that makes it easy to play audio in Node.js. At this point, the following audio players are supported:
+* mpg123
+* MPlayer
+* Sox
+* VLC
+
+Other audio players can easily be added by adding entries into the `supportedAudioPlayers.json` file.
 
 ## Installation
 ```
 npm install troubadour
 ```
-Since Troubadour only supports Sox at the moment, you will need to install Sox in order to use the module. In the future, you will be able to use other command-line audio players but they will have to be installed separately as well.
+Since Troubadour uses command-line audio players to facilitate audio playback, you will also need to install one of the supported players.
 
 ## Usage
 ### Getting Started
