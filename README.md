@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/jaredpetersen/troubadour.svg?branch=master)](https://travis-ci.org/jaredpetersen/troubadour)
 
 Troubadour is wrapper over command-line audio players that makes it easy to play audio in Node.js. At this point, the following audio players are supported:
-* mpg123
 * MPlayer
 * Sox
 * VLC
