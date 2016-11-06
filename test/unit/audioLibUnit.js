@@ -104,9 +104,25 @@ exports.shouldBehaveLikeAnAudioPlayer = (player) => {
       audioPlayer.play(eventEmitter, player.command + 'pikachu', player.arguments, 'filepath');
     });
 
-    it('emits an end event when the audio process ends playback');
+    it('emits an end event when the audio process ends playback', (done) => {
+      const eventEmitter = new EventEmitter();
 
-    it('emits a start event when the audio process starts playback');
+      eventEmitter.on('end', () => {
+        done();
+      });
+
+      audioPlayer.play(eventEmitter, player.command, player.arguments, '../audio/alarm_clock.mp3');
+    });
+
+    it('emits a start event when the audio process starts playback', (done) => {
+      const eventEmitter = new EventEmitter();
+
+      eventEmitter.on('start', () => {
+        done();
+      });
+
+      audioPlayer.play(eventEmitter, player.command, player.arguments, '../audio/alarm_clock.mp3');
+    });
 
     it('removes the start listener on the audio process when the audio process starts playback');
 
