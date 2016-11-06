@@ -124,9 +124,5 @@ exports.shouldBehaveLikeAnAudioPlayer = (player) => {
       audioPlayer.play(eventEmitter, player.command, player.arguments, '../audio/alarm_clock.mp3');
     });
 
-    it('removes the start listener on the audio process when the audio process starts playback');
-
-    it('removes the end listener on the audio process when the audio process ends playback');
-
   });
 };

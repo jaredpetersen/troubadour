@@ -97,10 +97,6 @@ describe('Index (Unit)', () => {
 
   describe('Pause', () => {
 
-    it('emits a pause event when the audio is paused');
-
-    it('sends a SIGSTOP signal to the audio process to pause it');
-
     it('emits an error when there is no audio playback to pause', (done) => {
       const troubadour = new Troubadour('sox');
 
@@ -113,15 +109,9 @@ describe('Index (Unit)', () => {
       troubadour.pause();
     });
 
-    it('emits an error event when audio playback is not ongoing');
-
   });
 
   describe('Stop', () => {
-
-    it('emits a stop event when the audio is stopped');
-
-    it('sends a kill signal to the audio process to stop it');
 
     it('emits an error when there is no audio playback to stop', (done) => {
       const troubadour = new Troubadour('sox');
@@ -134,8 +124,6 @@ describe('Index (Unit)', () => {
 
       troubadour.stop();
     });
-
-    it('emits an error event when audio playback is not ongoing');
 
   });
 
@@ -152,10 +140,6 @@ describe('Index (Unit)', () => {
 
       troubadour.resume();
     });
-
-    it('sends a SIGCONT signal to the audio process to resume it');
-
-    it('emits an error event when audio playback is not ongoing');
 
   });
 
