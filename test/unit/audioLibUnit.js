@@ -93,8 +93,16 @@ exports.shouldBehaveLikeAnAudioPlayer = (player) => {
       done();
     });
 
-    // TODO Figure out how to mock a process using rewire
-    it('emits an error event when something goes wrong with the audio process');
+    it('emits an error event when something goes wrong with the audio process', (done) => {
+      const eventEmitter = new EventEmitter();
+
+      eventEmitter.on('error', (err) => {
+        expect(err.message).to.equal('audio process encountered an error');
+        done();
+      });
+
+      audioPlayer.play(eventEmitter, player.command + 'pikachu', player.arguments, 'filepath');
+    });
 
     it('emits an end event when the audio process ends playback');
 
