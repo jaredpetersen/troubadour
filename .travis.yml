@@ -6,6 +6,9 @@ addons:
     packages:
       - sox
       - libsox-fmt-all
+      - mpg123
+      - vlc-nox
+      - mplayer
 branches:
   only:
     - master

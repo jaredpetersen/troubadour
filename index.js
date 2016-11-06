@@ -1,54 +1,81 @@
 'use strict';
 
 const EventEmitter = require('events');
-const process = require('child_process');
+let process = require('child_process');
 const fs = require('fs');
+const supportedAudioPlayers = require('./lib/supportedAudioPlayers');
+const audioPlayer = require('./lib/audioPlayer');
 
 class Troubadour extends EventEmitter {
 
-  constructor(audioPlayer) {
+  constructor(audioPlayerName) {
     super();
 
-    // Determine which audio player library to use
-    if (audioPlayer == null) {
-      throw new Error('audio library not specified');
+    // Determine which audio player to use
+    if (audioPlayerName == null) {
+      throw new Error('audio player not specified');
     }
-    else if (audioPlayer.toLowerCase() === 'sox') {
-      this.audioPlayerLib = require('./lib/sox.js');
-    }
-    else {
-      throw new Error('audio library not supported')
+
+    // Set up the audio player process
+    this.audioProcess = null;
+
+    // Loop over the supported audio players
+    supportedAudioPlayers.some((player) => {
+      if (player.name == audioPlayerName) {
+        return this.player = player;
+      }
+    });
+
+    // Confirm the user inputted a supported audio player
+    if (this.player == null) {
+      throw new Error('audio player not supported');
     }
   }
 
   play(filepath) {
-    // Make sure the user sent a valid filepath
     if (filepath == null) {
       this.emit('error', new Error('filepath not specified'));
-      return;
     }
     else if (filepath.includes(';') || filepath.includes('&&') || filepath.includes('||')) {
       this.emit('error', new Error('invalid filepath'));
-      return;
     }
     else if(fs.existsSync(filepath) === false) {
       this.emit('error', new Error('filepath not found'));
-      return;
     }
-
-    this.audioPlayerLib.play(this, filepath);
+    else {
+      this.audioProcess = audioPlayer.play(this, this.player.command, this.player.arguments, filepath);
+    }
   }
 
   pause() {
-    this.audioPlayerLib.pause(this);
+    if (this.audioProcess == null) {
+      this.emit('error', new Error('no audio playback to pause'));
+    }
+    else {
+      this.audioProcess.kill('SIGSTOP');
+      this.emit('pause');
+    }
   }
 
   stop() {
-    this.audioPlayerLib.stop(this);
+    if (this.audioProcess == null) {
+      this.emit('error', new Error('no audio playback to stop'));
+    }
+    else {
+      this.audioProcess.kill();
+      this.audioProcess == null;
+      this.emit('stop');
+    }
   }
 
   resume() {
-    this.audioPlayerLib.resume(this);
+    if (this.audioProcess == null) {
+      this.emit('error', new Error('no audio playback to resume'));
+    }
+    else {
+      this.audioProcess.kill('SIGCONT');
+      this.emit('resume');
+    }
   }
 
 }

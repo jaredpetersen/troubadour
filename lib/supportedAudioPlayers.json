@@ -1,0 +1,20 @@
+[
+  {
+    "name": "mplayer",
+    "command": "mplayer",
+    "arguments": [],
+    "processName": "mplayer"
+  },
+  {
+    "name": "sox",
+    "command": "play",
+    "arguments": [],
+    "processName": "play"
+  },
+  {
+    "name": "vlc",
+    "command": "cvlc",
+    "arguments": ["--play-and-exit"],
+    "processName": "vlc"
+  }
+]
