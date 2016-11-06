@@ -93,16 +93,36 @@ exports.shouldBehaveLikeAnAudioPlayer = (player) => {
       done();
     });
 
-    // TODO Figure out how to mock a process using rewire
-    it('emits an error event when something goes wrong with the audio process');
+    it('emits an error event when something goes wrong with the audio process', (done) => {
+      const eventEmitter = new EventEmitter();
 
-    it('emits an end event when the audio process ends playback');
+      eventEmitter.on('error', (err) => {
+        expect(err.message).to.equal('audio process encountered an error');
+        done();
+      });
 
-    it('emits a start event when the audio process starts playback');
+      audioPlayer.play(eventEmitter, player.command + 'pikachu', player.arguments, 'filepath');
+    });
 
-    it('removes the start listener on the audio process when the audio process starts playback');
+    it('emits an end event when the audio process ends playback', (done) => {
+      const eventEmitter = new EventEmitter();
 
-    it('removes the end listener on the audio process when the audio process ends playback');
+      eventEmitter.on('end', () => {
+        done();
+      });
+
+      audioPlayer.play(eventEmitter, player.command, player.arguments, '../audio/alarm_clock.mp3');
+    });
+
+    it('emits a start event when the audio process starts playback', (done) => {
+      const eventEmitter = new EventEmitter();
+
+      eventEmitter.on('start', () => {
+        done();
+      });
+
+      audioPlayer.play(eventEmitter, player.command, player.arguments, '../audio/alarm_clock.mp3');
+    });
 
   });
 };
