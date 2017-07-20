@@ -1,5 +1,11 @@
 [
   {
+    "name": "mpg123",
+    "command": "mpg123",
+    "arguments": [],
+    "processName": "mpg123"
+  },
+  {
     "name": "mplayer",
     "command": "mplayer",
     "arguments": [],

@@ -1,6 +1,6 @@
 {
   "name": "troubadour",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Node.js Audio Player",
   "main": "index.js",
   "scripts": {
