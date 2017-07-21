@@ -3,8 +3,9 @@
 [![NPM](https://img.shields.io/npm/v/troubadour.svg)](https://www.npmjs.com/package/troubadour)
 
 Troubadour is wrapper over command-line audio players that makes it easy to play audio in Node.js. At this point, the following audio players are supported:
+* mpg123
 * MPlayer
-* Sox
+* SoX
 * VLC
 
 Other audio players can easily be added by adding entries into the `supportedAudioPlayers.json` file.
