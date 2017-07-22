@@ -66,7 +66,7 @@ Stop the playback (without the ability to resume later) by using the `stop` func
 
 ```javascript
 troubadour.on('stop', () => {
-  // Do something here when the audio is paused
+  // Do something here when the audio is stopped
 });
 
 troubadour.stop();
