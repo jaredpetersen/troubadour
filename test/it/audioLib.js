@@ -28,8 +28,6 @@ exports.shouldBehaveLikeAnAudioPlayer = (audioPlayerName) => {
       troubadour.play('test/audio/alarm_clock.mp3');
     });
 
-    it('emits an error event when the audio encounters an error');
-
   });
 
   describe('Pause', () => {
