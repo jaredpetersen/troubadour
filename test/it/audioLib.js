@@ -1,7 +1,8 @@
 'use strict';
 
 const Troubadour = require('../../index.js');
-const expect = require('chai').expect;
+const chai = require('chai');
+const expect = chai.expect;
 
 exports.shouldBehaveLikeAnAudioPlayer = (audioPlayerName) => {
 
@@ -36,10 +37,10 @@ exports.shouldBehaveLikeAnAudioPlayer = (audioPlayerName) => {
     it('emits a pause event when the audio is paused', (done) => {
       const troubadour = new Troubadour(audioPlayerName);
 
-      // Wait until the audio starts to pause it
       troubadour.on('start', () => {
         troubadour.pause();
       });
+
       troubadour.on('pause', () => {
         done();
       });
@@ -58,7 +59,24 @@ exports.shouldBehaveLikeAnAudioPlayer = (audioPlayerName) => {
       troubadour.pause();
     });
 
-    it('emits an error event when audio playback is not ongoing');
+    it('emits an error event when audio playback is not ongoing', (done) => {
+      const troubadour = new Troubadour(audioPlayerName);
+
+      troubadour.on('error', (err) => {
+        expect(err.message).to.equal('no audio playback to pause');
+        done();
+      });
+
+      troubadour.on('end', () => {
+        troubadour.pause();
+      });
+
+      troubadour.on('pause', () => {
+        expect.fail();
+      });
+
+      troubadour.play('test/audio/alarm_clock.mp3');
+    });
 
   });
 
@@ -67,10 +85,10 @@ exports.shouldBehaveLikeAnAudioPlayer = (audioPlayerName) => {
     it('emits a stop event when the audio is stopped', (done) => {
       const troubadour = new Troubadour(audioPlayerName);
 
-      // Wait until the audio starts to stop it
       troubadour.on('start', () => {
         troubadour.stop();
       });
+
       troubadour.on('stop', () => {
         done();
       });
@@ -89,7 +107,24 @@ exports.shouldBehaveLikeAnAudioPlayer = (audioPlayerName) => {
       troubadour.stop();
     });
 
-    it('emits an error event when audio playback is not ongoing');
+    it('emits an error event when audio playback is not ongoing', (done) => {
+      const troubadour = new Troubadour(audioPlayerName);
+
+      troubadour.on('error', (err) => {
+        expect(err.message).to.equal('no audio playback to stop');
+        done();
+      });
+
+      troubadour.on('end', () => {
+        troubadour.stop();
+      });
+
+      troubadour.on('stop', () => {
+        expect.fail();
+      });
+
+      troubadour.play('test/audio/alarm_clock.mp3');
+    });
 
   });
 
@@ -98,13 +133,14 @@ exports.shouldBehaveLikeAnAudioPlayer = (audioPlayerName) => {
     it('emits a resume event when the audio is resumed', (done) => {
       const troubadour = new Troubadour(audioPlayerName);
 
-      // Wait until the audio pauses to resume it
       troubadour.on('start', () => {
         troubadour.pause();
       });
+
       troubadour.on('pause', () => {
         troubadour.resume();
       });
+
       troubadour.on('resume', () => {
         done();
       });
@@ -115,7 +151,6 @@ exports.shouldBehaveLikeAnAudioPlayer = (audioPlayerName) => {
     it('emits an error event when audio playback has not been started', (done) => {
       const troubadour = new Troubadour(audioPlayerName);
 
-      // Listen for the error event
       troubadour.on('error', (err) => {
         expect(err.message).to.equal('no audio playback to resume');
         done();

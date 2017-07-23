@@ -2,8 +2,8 @@
 
 const process = require('child_process');
 const supportedAudioPlayers = require('../lib/supportedAudioPlayers');
-const sharedunit = require('./unit/audioLibUnit');
-const sharedint = require('./integration/audioLibInt');
+const sharedunit = require('./ut/audioLib');
+const sharedint = require('./it/audioLib');
 
 // Run integration and unit tests for each audio player
 supportedAudioPlayers.forEach((player) => {
