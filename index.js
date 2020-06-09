@@ -6,7 +6,7 @@ const fs = require('fs');
 const supportedAudioPlayers = require('./lib/supportedAudioPlayers');
 const audioPlayer = require('./lib/audioPlayer');
 
-class Troubadour extends EventEmitter {
+class Troubadour extends EventEmitter.EventEmitter {
 
   constructor(audioPlayerName) {
     super();
